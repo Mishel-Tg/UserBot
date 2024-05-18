@@ -26,7 +26,7 @@ SESSION = os.environ.get('SESSION')  # Assuming SESSION is a string environment 
 
 SUDO = [6511724381, 1867106198]  # List of authorized user IDs
 piro = Client(
-        "Gojo",
+        "Userbot",
         session_string=SESSION,
         api_id=API_ID,
         api_hash=API_HASH,
