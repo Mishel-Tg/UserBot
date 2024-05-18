@@ -1,6 +1,6 @@
 # a simple pyrogram User bot
 
 
-#Fectures 
+# Fectures 
 ```.promote
 updating ```
