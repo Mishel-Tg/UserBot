@@ -1,10 +1,11 @@
 from pyrogram import *
 from pyrogram.types import *
+import piro
+import SUDO
 
 
-
-@Client.on_message(filters.command("promote") & filters.user(SUDO))
-async def promoting(client, message):
+@piro.on_message(filters.command("promote") & filters.user(SUDO))
+async def promoting(_, message):
      global new_admin
      if not message.reply_to_message:
          return await message.reply("use this command reply")
@@ -12,13 +13,13 @@ async def promoting(client, message):
      chat_id = message.chat.id
      new_admin = reply.from_user
      admin = message.from_user     
-     bot_stats = await client.get_chat_member(chat_id, "self")
+     bot_stats = await piro.get_chat_member(chat_id, "self")
      if not bot_stats.privileges:
          return await message.reply("opps! iam not admin")     
      elif not bot_stats.privileges.can_promote_members:
          return await message.reply("i dont have admin rights ")   
           msg = await message.reply_text("Promoting")
-          await client.promote_chat_member(
+          await piro.promote_chat_member(
             message.chat.id,
             new_admin.id,
             privileges=pyrogram.types.ChatPrivileges(
@@ -32,28 +33,22 @@ async def promoting(client, message):
           await msg.edit(f"Alright!! Successful promoted {admin.mention}")
 
 
-@Client.on_message(filters.command("demote") & filters.group)
-async def demote(client, message):
+@piro.on_message(filters.command("demote") & filters.user(SUDO))
+async def demote(_, message):
      global new_admin
      if not message.reply_to_message:
          return await message.reply("use this command reply")
      reply = message.reply_to_message
      chat_id = message.chat.id
      new_admin = reply.from_user
-     admin = message.from_user
-     user_stats = await client.get_chat_member(chat_id, admin.id)
-     bot_stats = await client.get_chat_member(chat_id, "self")
+     admin = message.from_user     
+     bot_stats = await piro.get_chat_member(chat_id, "self")
      if not bot_stats.privileges:
-         return await message.reply("hey dude iam not admin")
-     elif not user_stats.privileges:
-         return await message.reply("Sorry dude you need admin")
+         return await message.reply("hey dude iam not admin")     
      elif not bot_stats.privileges.can_promote_members:
          return await message.reply("i dont have admin rights ")
-     elif not user_stats.privileges.can_promote_members:
-         return await message.reply("you need admin rights 😒")
-     elif user_stats.privileges.can_promote_members:
           msg = await message.reply_text("`Proccing...`")
-          await client.promote_chat_member(
+          await piro.promote_chat_member(
             chat_id,
             new_admin.id,
             privileges=pyrogram.types.ChatPrivileges(
