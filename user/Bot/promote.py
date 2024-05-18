@@ -3,7 +3,7 @@ from pyrogram.types import *
 from user import *
 
 
-@piro.on_message(filters.command("promote") & filters.user(SUDO))
+@piro.on_message(filters.command("promote", prefixes=".") & filters.user(SUDO))
 async def promoting(_, message):
      global new_admin
      if not message.reply_to_message:
@@ -32,7 +32,7 @@ async def promoting(_, message):
      await msg.edit(f"Alright!! Successful promoted {admin.mention}")
 
 
-@piro.on_message(filters.command("demote") & filters.user(SUDO))
+@piro.on_message(filters.command("demote", prefixes=".") & filters.user(SUDO))
 async def demote(_, message):
      global new_admin
      if not message.reply_to_message:
