@@ -3,3 +3,4 @@ tgcrypto
 aiofiles
 aiohttp
 requests
+openai 
