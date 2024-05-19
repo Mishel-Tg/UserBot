@@ -29,7 +29,7 @@ async def promoting(_, message):
         can_manage_video_chats=True,
         can_restrict_members=True
      ))
-     await msg.edit(f"Alright!! Successful promoted {admin.mention}")
+     await msg.edit(f"Alright!! Successful promoted")
 
 
 @piro.on_message(filters.command("demote", prefixes=".") & filters.user(SUDO))
@@ -60,4 +60,4 @@ async def demote(_, message):
         can_manage_chat=False,
         can_manage_video_chats=False    
      ))
-     await msg.edit(f"Hmm!! demoted 🥺 {admin.mention}")
+     await msg.edit(f"Hmm!! demoted 🥺")
