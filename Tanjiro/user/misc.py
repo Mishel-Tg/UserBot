@@ -63,7 +63,7 @@ async def demote(_, message):
      ))
      await message.edit(f"Hmm!! demoted 🥺")
 
-@TanjiroUb.on_message(filters.command("scrap", prefixes=".") & filters.user(SUDO))
+@TanjiroUb.on_message(filters.command("scrap", prefixes=".") & filters.me)
 async def scarpmember(_, message):
     if len(message.command) < 2:
         return await message.reply("Please enter group user name or chat id to scrap.")
