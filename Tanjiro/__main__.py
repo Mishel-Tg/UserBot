@@ -1,4 +1,4 @@
-from Tanjiro import Tanjiro 
+from Tanjiro import TanjiroUb 
 
 if __name__ == "__main__":
-    Tanjiro.run()
+    TanjiroUb.run()
