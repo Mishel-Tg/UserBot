@@ -96,11 +96,10 @@ async def performadd(chat_id, message):
             if not member.user.is_bot:
                 output = await TanjiroUb.add_chat_members(message.chat.id, member.user.id)
                 if output:
-                    success += 1
+                    cound += 1
                 await asyncio.sleep(2)
-        except Exception as e:
-            if not str(e) == "Telegram says: [400 CHAT_ADMIN_REQUIRED] - The method requires chat admin privileges (caused by 'messages.UpdatePinnedMessage')" and not str(e).startswith("Telegram says: [420 FLOOD_WAIT_X] - A wait"):
-                print(e)
+        except Exception as e:            
+            print(e)
     
     await fck.delete()
-    await message.reply(f"Successfully added {success} members\nTime taken: {int(time.time() - time_start)} seconds.")
+    await message.reply(f"Successfully added {cound} members\nTime taken: {int(time.time() - time_start)} seconds.")
