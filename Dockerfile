@@ -8,4 +8,4 @@ RUN pip install -U pip && pip install -U -r requirements.txt
 WORKDIR /app
 
 COPY . .
-CMD ["python", "userbot.py"]
+CMD ["python3","-m","Tanjiro"]
