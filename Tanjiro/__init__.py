@@ -5,8 +5,9 @@ API_HASH = os.environ.get('API_HASH')
 SESSION = os.environ.get('SESSION')  
 
 SUDO = [1867106198]  
+
 Tanjiro = Client(
-        "Userbot",
+        "ub",
         session_string=SESSION,
         api_id=API_ID,
         api_hash=API_HASH,
