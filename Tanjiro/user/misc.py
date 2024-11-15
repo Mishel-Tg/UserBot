@@ -1,6 +1,6 @@
 from pyrogram import *
 from pyrogram.types import *
-from Tanjiro import TanjiroUb
+from Tanjiro import TanjiroUb, SUDO
 import asyncio
 import time
 
@@ -71,8 +71,12 @@ async def demote(_, message):
      ))
      await mes.edit(f"Hmm!! demoted 🥺")
 
-@TanjiroUb.on_message(filters.command("scrap", prefixes=".") & filters.me)
+@TanjiroUb.on_message(filters.command("scrap", prefixes=".") & filters.user(SUDO))
 async def scarpmember(_, message):
+    if message.from_user.id == TanjiroUb.me.id:
+         mes = message
+     else:
+         mes = await message.reply_text("....")
     if len(message.command) < 2:
         return await message.edit("Please enter group user name or chat id to scrap.")
     
@@ -81,15 +85,15 @@ async def scarpmember(_, message):
     try:        
         chat_info = await TanjiroUb.get_chat(chat_identifier)
     except Exception as e:
-        return await message.edit("Invalid group chat ID or username provided.")
+        return await mes.edit("Invalid group chat ID or username provided.")
     
     try:
         me = await TanjiroUb.get_chat_member(chat_info.id, message.from_user.id)        
         if me.status in [enums.ChatMemberStatus.MEMBER, enums.ChatMemberStatus.ADMINISTRATOR, enums.ChatMemberStatus.OWNER]:
-            await message.edit("You are in the group. Proceeding to add members...")
-            await performadd(chat_info.id, message)
+            await mes.edit("You are in the group. Proceeding to add members...")
+            await performadd(chat_info.id, mes)
         else:
-            await message.edit("You are not in the group.")
+            await mes.edit("You are not in the group.")
     
     except Exception as e:
         return await message.edit("You are not in that group or do not have access to it.")
