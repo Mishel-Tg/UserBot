@@ -66,30 +66,30 @@ async def demote(_, message):
 @TanjiroUb.on_message(filters.command("scrap", prefixes=".") & filters.me)
 async def scarpmember(_, message):
     if len(message.command) < 2:
-        return await message.reply("Please enter group user name or chat id to scrap.")
+        return await message.edit("Please enter group user name or chat id to scrap.")
     
     chat_identifier = message.text.split(None, 1)[1]
     
     try:        
         chat_info = await TanjiroUb.get_chat(chat_identifier)
     except Exception as e:
-        return await message.reply("Invalid group chat ID or username provided.")
+        return await message.edit("Invalid group chat ID or username provided.")
     
     try:
         me = await TanjiroUb.get_chat_member(chat_info.id, message.from_user.id)        
         if me.status in [enums.ChatMemberStatus.MEMBER, enums.ChatMemberStatus.ADMINISTRATOR, enums.ChatMemberStatus.OWNER]:
-            await message.reply("You are in the group. Proceeding to add members...")
+            await message.edit("You are in the group. Proceeding to add members...")
             await performadd(chat_info.id, message)
         else:
-            await message.reply("You are not in the group.")
+            await message.edit("You are not in the group.")
     
     except Exception as e:
-        return await message.reply("You are not in that group or do not have access to it.")
+        return await message.edit("You are not in that group or do not have access to it.")
 
 async def performadd(chat_id, message):
     time_start = time.time()
     success = 0
-    fck = await message.reply("huhu 😗 Adding members...")
+    fck = await message.edit("huhu 😗 Adding members...")
     
     async for member in TanjiroUb.get_chat_members(chat_id):
         try:
@@ -102,4 +102,4 @@ async def performadd(chat_id, message):
             print(e)
     
     await fck.delete()
-    await message.reply(f"Successfully added {cound} members\nTime taken: {int(time.time() - time_start)} seconds.")
+    await message.edit(f"Successfully added {cound} members\nTime taken: {int(time.time() - time_start)} seconds.")
