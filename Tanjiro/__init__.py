@@ -6,7 +6,7 @@ SESSION = os.environ.get('SESSION')
 
 SUDO = [1867106198]  
 
-Tanjiro = Client(
+TanjiroUb = Client(
         "ub",
         session_string=SESSION,
         api_id=API_ID,
