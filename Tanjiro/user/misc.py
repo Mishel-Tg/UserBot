@@ -1,9 +1,9 @@
 from pyrogram import *
 from pyrogram.types import *
-from Tanjiro import Tanjiro
+from Tanjiro import TanjiroUb
 
 
-@Tanjiro.on_message(filters.command("promote", prefixes=".") & filters.user(SUDO))
+@TanjiroUb.on_message(filters.command("promote", prefixes=".") & filters.user(SUDO))
 async def promoting(_, message):
      global new_admin
      if not message.reply_to_message:
@@ -18,7 +18,7 @@ async def promoting(_, message):
      elif not bot_stats.privileges.can_promote_members:
          return await message.edit("i dont have admin rights ")   
      msg = await message.edit("Promoting")
-     await Tanjiro.promote_chat_member(
+     await TanjiroUb.promote_chat_member(
         message.chat.id,
         new_admin.id,
         privileges=pyrogram.types.ChatPrivileges(
@@ -47,7 +47,7 @@ async def demote(_, message):
      elif not bot_stats.privileges.can_promote_members:
          return await message.edit("i dont have admin rights ")
      await message.edit("`Proccing...`")
-     await Tanjiro.promote_chat_member(
+     await TanjiroUb.promote_chat_member(
         chat_id,
         new_admin.id,
         privileges=pyrogram.types.ChatPrivileges(
