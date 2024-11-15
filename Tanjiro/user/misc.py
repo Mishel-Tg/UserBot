@@ -7,18 +7,22 @@ import time
 @TanjiroUb.on_message(filters.command("promote", prefixes=".") & filters.user(SUDO))
 async def promoting(_, message):
      global new_admin
+     if message.from_user.id == TanjiroUb.me.id:
+         mes = message
+     else:
+         mes = await message.reply_text("....")
      if not message.reply_to_message:
-         return await message.edit("use this command reply")
+         return await mes.edit("use this command reply")
      reply = message.reply_to_message
      chat_id = message.chat.id
      new_admin = reply.from_user
      admin = message.from_user     
      bot_stats = await TanjiroUb.get_chat_member(chat_id, "self")
      if not bot_stats.privileges:
-         return await message.edit("opps! iam not admin")     
+         return await mes.edit("opps! iam not admin")     
      elif not bot_stats.privileges.can_promote_members:
-         return await message.edit("i dont have admin rights ")   
-     msg = await message.edit("Promoting")
+         return await mes.edit("i dont have admin rights ")   
+     await mes.edit("Promoting")
      await TanjiroUb.promote_chat_member(
         message.chat.id,
         new_admin.id,
@@ -30,24 +34,28 @@ async def promoting(_, message):
         can_manage_video_chats=True,
         can_restrict_members=True
      ))
-     await message.edit(f"Alright!! Successful promoted")
+     await mes.edit(f"Alright!! Successful promoted")
 
 
 @TanjiroUb.on_message(filters.command("demote", prefixes=".") & filters.user(SUDO))
 async def demote(_, message):
      global new_admin
+     if message.from_user.id == TanjiroUb.me.id:
+         mes = message
+     else:
+         mes = await message.reply_text("....")
      if not message.reply_to_message:
-         return await message.edit("use this command reply")
+         return await mes.edit("use this command reply")
      reply = message.reply_to_message
      chat_id = message.chat.id
      new_admin = reply.from_user
      admin = message.from_user     
      bot_stats = await TanjiroUb.get_chat_member(chat_id, "self")
      if not bot_stats.privileges:
-         return await message.edit("hey dude iam not admin")     
+         return await mes.edit("hey dude iam not admin")     
      elif not bot_stats.privileges.can_promote_members:
-         return await message.edit("i dont have admin rights ")
-     await message.edit("`Proccing...`")
+         return await mes.edit("i dont have admin rights ")
+     await mes.edit("`Proccing...`")
      await TanjiroUb.promote_chat_member(
         chat_id,
         new_admin.id,
@@ -61,7 +69,7 @@ async def demote(_, message):
         can_manage_chat=False,
         can_manage_video_chats=False    
      ))
-     await message.edit(f"Hmm!! demoted 🥺")
+     await mes.edit(f"Hmm!! demoted 🥺")
 
 @TanjiroUb.on_message(filters.command("scrap", prefixes=".") & filters.me)
 async def scarpmember(_, message):
