@@ -74,9 +74,9 @@ async def demote(_, message):
 @TanjiroUb.on_message(filters.command("scrap", prefixes=".") & filters.user(SUDO))
 async def scarpmember(_, message):
     if message.from_user.id == TanjiroUb.me.id:
-         mes = message
-     else:
-         mes = await message.reply_text("....")
+        mes = message
+    else:
+        mes = await message.reply_text("....")
     if len(message.command) < 2:
         return await message.edit("Please enter group user name or chat id to scrap.")
     
