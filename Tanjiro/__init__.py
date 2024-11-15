@@ -11,6 +11,6 @@ Tanjiro = Client(
         session_string=SESSION,
         api_id=API_ID,
         api_hash=API_HASH,
-        plugins=dict(root="user/Bot") )
+        plugins=dict(root="Tanjiro/user") )
 
     
