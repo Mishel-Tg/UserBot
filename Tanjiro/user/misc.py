@@ -1,6 +1,6 @@
 from pyrogram import *
 from pyrogram.types import *
-from user import Tanjiro
+from Tanjiro import Tanjiro
 
 
 @Tanjiro.on_message(filters.command("promote", prefixes=".") & filters.user(SUDO))
