@@ -1,9 +1,11 @@
 from pyrogram import Client
 
 API_ID = int(os.environ.get('API_ID'))  
+API_HASH = os.environ.get('API_HASH')  
+SESSION = os.environ.get('SESSION')  
 
 SUDO = [1867106198]  
-tanjiro = Client(
+Tanjiro = Client(
         "Userbot",
         session_string=SESSION,
         api_id=API_ID,
